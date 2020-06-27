@@ -84,10 +84,16 @@ parameter SB = 3'b000;
 parameter SH = 3'b001;
 parameter SW = 3'b010;
 
+parameter LB = 3'b000;
+parameter LH = 3'b001;
+parameter LW = 3'b010;
+parameter LBU = 3'b100;
+parameter LHU = 3'b101;
+
 parameter R_TYPE = 5'b01100;
 parameter B_TYPE = 5'b11000;
-parameter I1_TYPE = 5'b00100;
-parameter I2_TYPE = 5'b00000;
+parameter I_CAL = 5'b00100;
+parameter I_LOAD = 5'b00000;
 parameter S_TYPE = 5'b01000;
 parameter LUI_TYPE = 5'b01101;
 parameter AUIPC_TYPE = 5'b00101;
@@ -126,33 +132,34 @@ begin
 case (inst[6:2])
     R_TYPE:
     begin
-        PCSel <= 1'b0;
+        PCSel <= 1'b0; 
         ImmSel <= IMM_R_TYPE;
         RegWen <= 1'b1;
         BSel <= 1'b0;
         ASel <= 1'b0;
         MemRW <= 1'b0;
         WBSel <= 2'd1;
+        
         case (inst[14:12])
-        3'b000:
+        3'b000: // ADD + SUB
             case (inst[30])
-            1'b0: ALUSel <= ADD;
-            1'b1: ALUSel <= SUB;
+            1'b0: ALUSel <= ADD; // ADD
+            1'b1: ALUSel <= SUB; // SUB
             endcase
-        3'b001: ALUSel <= SLL;
-        3'b010: ALUSel <= SLT;
-        3'b011: ALUSel <= USLT;
-        3'b100: ALUSel <= XOR;
+        3'b001: ALUSel <= SLL; // SLL
+        3'b010: ALUSel <= SLT; //SLT
+        3'b011: ALUSel <= USLT; // SLTU
+        3'b100: ALUSel <= XOR; // X?
         3'b101: 
             case(inst[30])
-            1'b0: ALUSel <= SRL;
-            1'b1: ALUSel <= SRA;
+            1'b0: ALUSel <= SRL;  // SRL
+            1'b1: ALUSel <= SRA; // SRA
             endcase
-        3'b110: ALUSel <= OR;
-        3'b111: ALUSel <= AND;
+        3'b110: ALUSel <= OR; // OR
+        3'b111: ALUSel <= AND; // AND
         endcase
     end
-    I1_TYPE:
+    I_CAL:
     begin
         PCSel <= 1'b0;
         ImmSel <= IMM_I_TYPE;
@@ -161,19 +168,20 @@ case (inst[6:2])
         ASel <= 1'b0;
         MemRW <= 1'b0;
         WBSel <= 2'd1;
+        
         case (inst[14:12])
-        3'b000: ALUSel <= ADD;
-        3'b010: ALUSel <= SLT;
-        3'b011: ALUSel <= USLT;
-        3'b100: ALUSel <= XOR;
-        3'b110: ALUSel <= OR;
+        3'b000: ALUSel <= ADD; // addi
+        3'b010: ALUSel <= SLT; // slti
+        3'b011: ALUSel <= USLT; // sltiu
+        3'b100: ALUSel <= XOR; // xori
+        3'b110: ALUSel <= OR; //ori
         3'b101: 
             case(inst[30])
-            1'b0: ALUSel <= SRL;
-            1'b1: ALUSel <= SRA;
+            1'b0: ALUSel <= SRL; // srli
+            1'b1: ALUSel <= SRA; // srai
             endcase
-        3'b001: ALUSel <= SLL;
-        3'b111: ALUSel <= AND;
+        3'b001: ALUSel <= SLL; // slli
+        3'b111: ALUSel <= AND; // andi
         endcase
     end
     B_TYPE:
@@ -197,12 +205,12 @@ case (inst[6:2])
         end
         BLT:
         begin
-            BrUn <= 1'b1;
+            BrUn <= 1'b0;
             PCSel <= BrLT;
         end
         BGE:
         begin
-            BrUn <= 1'b1;
+            BrUn <= 1'b0;
             PCSel <= ~BrLT;
             
         end
@@ -218,7 +226,7 @@ case (inst[6:2])
         end
         endcase
     end
-    I2_TYPE:
+    I_LOAD:
     begin
         PCSel <= 1'b0;
         ImmSel <= IMM_I_TYPE;
@@ -226,20 +234,14 @@ case (inst[6:2])
         BSel <= 1'b1;
         ASel <= 1'b0;
         MemRW <= 1'b0;
-        WBSel <= 2'd1;
+        WBSel <= 2'd0;
+        ALUSel <= ADD;
         case (inst[14:12])
-        3'b000: ALUSel <= ADD;
-        3'b010: ALUSel <= SLT;
-        3'b011: ALUSel <= USLT;
-        3'b100: ALUSel <= XOR;
-        3'b110: ALUSel <= OR;
-        3'b101: 
-            case(inst[30])
-            1'b0: ALUSel <= SRL;
-            1'b1: ALUSel <= SRA;
-            endcase
-        3'b001: ALUSel <= SLL;
-        3'b111: ALUSel <= AND;
+        LB: RSel <= 3'd2;
+        LH: RSel <= 3'd1;
+        LW: RSel <= 3'd0;
+        LBU: RSel <= 3'd4;
+        LHU: RSel <= 3'd3;
         endcase
     end
     S_TYPE:
@@ -250,6 +252,7 @@ case (inst[6:2])
         BSel <= 1'b1;
         ASel <= 1'b0;
         MemRW <= 1'b1;
+        ALUSel <= ADD;
         case (inst[14:12])
         SB: WSel <= 2'd2;
         SH: WSel <= 2'd1;
@@ -283,6 +286,10 @@ case (inst[6:2])
         MemRW <= 1'b0;
         WBSel <= 2'd2;
         ALUSel <= ADD;
+    end
+    default:
+    begin
+        MemRW <= 1'b0;
     end
 
 endcase

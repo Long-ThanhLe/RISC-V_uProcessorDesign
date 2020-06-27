@@ -1,0 +1,29 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Sat Jun 27 00:22:02 2020
+# Process ID: 5612
+# Current directory: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10408 C:\Users\forev\Desktop\CH\uprocessor-design\SingleCycle\project\singlecycle.xpr
+# Log file: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/vivado.log
+# Journal file: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source single_cycle.tcl
+current_wave_config {Untitled 1}
+add_wave {{/single_cycle/REG_FILES/reg_file}} 
+current_wave_config {Untitled 1}
+add_wave {{/single_cycle/DMEM/MEM[30]}} {{/single_cycle/DMEM/MEM[29]}} {{/single_cycle/DMEM/MEM[28]}} {{/single_cycle/DMEM/MEM[27]}} {{/single_cycle/DMEM/MEM[26]}} {{/single_cycle/DMEM/MEM[25]}} {{/single_cycle/DMEM/MEM[24]}} {{/single_cycle/DMEM/MEM[23]}} {{/single_cycle/DMEM/MEM[22]}} {{/single_cycle/DMEM/MEM[21]}} {{/single_cycle/DMEM/MEM[20]}} {{/single_cycle/DMEM/MEM[19]}} {{/single_cycle/DMEM/MEM[18]}} {{/single_cycle/DMEM/MEM[17]}} {{/single_cycle/DMEM/MEM[16]}} {{/single_cycle/DMEM/MEM[15]}} {{/single_cycle/DMEM/MEM[14]}} {{/single_cycle/DMEM/MEM[13]}} {{/single_cycle/DMEM/MEM[12]}} {{/single_cycle/DMEM/MEM[11]}} {{/single_cycle/DMEM/MEM[10]}} {{/single_cycle/DMEM/MEM[9]}} {{/single_cycle/DMEM/MEM[8]}} {{/single_cycle/DMEM/MEM[7]}} {{/single_cycle/DMEM/MEM[6]}} {{/single_cycle/DMEM/MEM[5]}} {{/single_cycle/DMEM/MEM[4]}} {{/single_cycle/DMEM/MEM[3]}} {{/single_cycle/DMEM/MEM[2]}} {{/single_cycle/DMEM/MEM[1]}} {{/single_cycle/DMEM/MEM[0]}} 
+relaunch_sim
+close_sim
+launch_simulation
+source single_cycle.tcl
+current_wave_config {Untitled 2}
+add_wave {{/single_cycle/REG_FILES/reg_file}} 
+current_wave_config {Untitled 2}
+add_wave {{/single_cycle/DMEM/MEM[40]}} {{/single_cycle/DMEM/MEM[39]}} {{/single_cycle/DMEM/MEM[38]}} {{/single_cycle/DMEM/MEM[37]}} {{/single_cycle/DMEM/MEM[36]}} {{/single_cycle/DMEM/MEM[35]}} {{/single_cycle/DMEM/MEM[34]}} {{/single_cycle/DMEM/MEM[33]}} {{/single_cycle/DMEM/MEM[32]}} {{/single_cycle/DMEM/MEM[31]}} {{/single_cycle/DMEM/MEM[30]}} {{/single_cycle/DMEM/MEM[29]}} {{/single_cycle/DMEM/MEM[28]}} {{/single_cycle/DMEM/MEM[27]}} {{/single_cycle/DMEM/MEM[26]}} {{/single_cycle/DMEM/MEM[25]}} {{/single_cycle/DMEM/MEM[24]}} {{/single_cycle/DMEM/MEM[23]}} {{/single_cycle/DMEM/MEM[22]}} {{/single_cycle/DMEM/MEM[21]}} {{/single_cycle/DMEM/MEM[20]}} {{/single_cycle/DMEM/MEM[19]}} {{/single_cycle/DMEM/MEM[18]}} {{/single_cycle/DMEM/MEM[17]}} {{/single_cycle/DMEM/MEM[16]}} {{/single_cycle/DMEM/MEM[15]}} {{/single_cycle/DMEM/MEM[14]}} {{/single_cycle/DMEM/MEM[13]}} {{/single_cycle/DMEM/MEM[12]}} {{/single_cycle/DMEM/MEM[11]}} {{/single_cycle/DMEM/MEM[10]}} {{/single_cycle/DMEM/MEM[9]}} {{/single_cycle/DMEM/MEM[8]}} {{/single_cycle/DMEM/MEM[7]}} {{/single_cycle/DMEM/MEM[6]}} {{/single_cycle/DMEM/MEM[5]}} {{/single_cycle/DMEM/MEM[4]}} {{/single_cycle/DMEM/MEM[3]}} {{/single_cycle/DMEM/MEM[2]}} {{/single_cycle/DMEM/MEM[1]}} {{/single_cycle/DMEM/MEM[0]}} 
+relaunch_sim

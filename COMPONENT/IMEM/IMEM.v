@@ -23,7 +23,7 @@ assign		pByte = PC[1:0];
 
 initial begin
 //$readmemh("C:/Users/forev/Desktop/CH/BTL_RISCV/factorial.txt",IMEM);
-$readmemh("C:/Users/forev/Desktop/CH/uprocessor-design/Test/arrangement.txt",IMEM);
+$readmemh("C:/Users/forev/Desktop/CH/uprocessor-design/Test/arr.txt",IMEM);
 end
 
 always@(PC)

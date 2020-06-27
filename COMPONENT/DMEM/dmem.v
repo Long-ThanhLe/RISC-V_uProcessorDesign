@@ -48,43 +48,55 @@ initial begin
     MEM[i] = 32'd0;
 end
 
+always @(*)
+begin
+    case (Wen)
+    1'b0: // Read
+    begin
+    case (RSel)
+        3'd0: // Word 
+            datar = MEM[addr[12:2]];
+        3'd1: // Halfword
+            case (addr[1])
+            1'b0:
+                datar = ((MEM[addr[12:2]] & 32'h0000ffff) << 16) >>> 16;
+            1'b1:
+                datar = (MEM[addr[12:2]] & 32'hffff0000 ) >>> 16 ;
+            endcase
+        3'd2: // Byte 
+            case (addr[1:0])
+            2'd0: datar = ((MEM[addr[12:2]] & 32'h000000ff ) << 24) >>> 24;
+            2'd1: datar = ((MEM[addr[12:2]] & 32'h0000ff00 ) << 16) >>> 24;
+            2'd2: datar = ((MEM[addr[12:2]] & 32'h00ff0000 ) << 8 ) >>> 24;
+            2'd3: datar = ((MEM[addr[12:2]] & 32'hff000000 ) << 0 ) >>> 24;
+            endcase
+        3'd3: //Unsigned Halfword
+                case (addr[1])
+                1'b0:
+                    datar = MEM[addr[12:2]] & 32'h0000ffff;
+                1'b1:
+                    datar = (MEM[addr[12:2]] & 32'hffff0000 ) >> 16 ;
+                endcase
+        3'd4: //Unsigned Byte 
+            case (addr[1:0])
+            2'd0: datar = (MEM[addr[12:2]] & 32'h000000ff );
+            2'd1: datar = (MEM[addr[12:2]] & 32'h0000ff00 ) >> 8;
+            2'd2: datar = (MEM[addr[12:2]] & 32'h00ff0000 ) >> 16;
+            2'd3: datar = (MEM[addr[12:2]] & 32'hff000000 ) >> 24;
+            endcase
+        endcase
+    end
+    1'b1: // Write
+    begin
+    end
+    endcase
+end
+
 always @(posedge clk)
 begin
     case (Wen)
     1'b0: // Read
     begin
-        case (RSel)
-        3'd0: // Word 
-            datar <= MEM[addr[12:2]];
-        3'd1: // Halfword
-            case (addr[1])
-            1'b0:
-                datar <= ((MEM[addr[12:2]] & 32'h0000ffff) << 16) >>> 16;
-            1'b1:
-                datar <= (MEM[addr[12:2]] & 32'hffff0000 ) >>> 16 ;
-            endcase
-        3'd2: // Byte 
-            case (addr[1:0])
-            2'd0: datar <= ((MEM[addr[12:2]] & 32'h000000ff ) << 24) >>> 24;
-            2'd1: datar <= ((MEM[addr[12:2]] & 32'h0000ff00 ) << 16) >>> 24;
-            2'd2: datar <= ((MEM[addr[12:2]] & 32'h00ff0000 ) << 8 ) >>> 24;
-            2'd3: datar <= ((MEM[addr[12:2]] & 32'hff000000 ) << 0 ) >>> 24;
-            endcase
-        3'd3: //Unsigned Halfword
-                case (addr[1])
-                1'b0:
-                    datar <= MEM[addr[12:2]] & 32'h0000ffff;
-                1'b1:
-                    datar <= (MEM[addr[12:2]] & 32'hffff0000 ) >> 16 ;
-                endcase
-        3'd4: //Unsigned Byte 
-            case (addr[1:0])
-            2'd0: datar <= (MEM[addr[12:2]] & 32'h000000ff );
-            2'd1: datar <= (MEM[addr[12:2]] & 32'h0000ff00 ) >> 8;
-            2'd2: datar <= (MEM[addr[12:2]] & 32'h00ff0000 ) >> 16;
-            2'd3: datar <= (MEM[addr[12:2]] & 32'hff000000 ) >> 24;
-            endcase
-        endcase
     end
     1'b1: // Write
     begin

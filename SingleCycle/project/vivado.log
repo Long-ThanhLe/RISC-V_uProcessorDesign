@@ -1,0 +1,204 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Sat Jun 27 00:22:02 2020
+# Process ID: 5612
+# Current directory: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10408 C:\Users\forev\Desktop\CH\uprocessor-design\SingleCycle\project\singlecycle.xpr
+# Log file: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/vivado.log
+# Journal file: C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'E:/Install/Vivado/Vivado/2018.2/data/ip'.
+open_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:06 . Memory (MB): peak = 799.301 ; gain = 117.988
+update_compile_order -fileset sources_1
+launch_simulation
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'single_cycle' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj single_cycle_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: E:/Install/Vivado/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 778b0a54642f42fbbea175796e342fc7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot single_cycle_behav xil_defaultlib.single_cycle xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "single_cycle_behav -key {Behavioral:sim_1:Functional:single_cycle} -tclbatch {single_cycle.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+source single_cycle.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'single_cycle_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 822.617 ; gain = 11.203
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/single_cycle/REG_FILES/reg_file}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/single_cycle/DMEM/MEM[30]}} {{/single_cycle/DMEM/MEM[29]}} {{/single_cycle/DMEM/MEM[28]}} {{/single_cycle/DMEM/MEM[27]}} {{/single_cycle/DMEM/MEM[26]}} {{/single_cycle/DMEM/MEM[25]}} {{/single_cycle/DMEM/MEM[24]}} {{/single_cycle/DMEM/MEM[23]}} {{/single_cycle/DMEM/MEM[22]}} {{/single_cycle/DMEM/MEM[21]}} {{/single_cycle/DMEM/MEM[20]}} {{/single_cycle/DMEM/MEM[19]}} {{/single_cycle/DMEM/MEM[18]}} {{/single_cycle/DMEM/MEM[17]}} {{/single_cycle/DMEM/MEM[16]}} {{/single_cycle/DMEM/MEM[15]}} {{/single_cycle/DMEM/MEM[14]}} {{/single_cycle/DMEM/MEM[13]}} {{/single_cycle/DMEM/MEM[12]}} {{/single_cycle/DMEM/MEM[11]}} {{/single_cycle/DMEM/MEM[10]}} {{/single_cycle/DMEM/MEM[9]}} {{/single_cycle/DMEM/MEM[8]}} {{/single_cycle/DMEM/MEM[7]}} {{/single_cycle/DMEM/MEM[6]}} {{/single_cycle/DMEM/MEM[5]}} {{/single_cycle/DMEM/MEM[4]}} {{/single_cycle/DMEM/MEM[3]}} {{/single_cycle/DMEM/MEM[2]}} {{/single_cycle/DMEM/MEM[1]}} {{/single_cycle/DMEM/MEM[0]}} 
+relaunch_sim
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'single_cycle' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj single_cycle_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: E:/Install/Vivado/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 778b0a54642f42fbbea175796e342fc7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot single_cycle_behav xil_defaultlib.single_cycle xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '1' seconds
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+relaunch_sim: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 858.949 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_simulation
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'single_cycle' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj single_cycle_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/ALU/ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMEM/IMEM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IMEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/PC_4/add_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module add_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_COMP/branch_comp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_comp
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/CONTROL/control.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module control
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/DMEM/dmem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dmem
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMM_GEN/imm_gen.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_gen
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux4
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/PC/pc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pc
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/REGS_FILE/regs.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regs
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/single_cycle.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module single_cycle
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: E:/Install/Vivado/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 778b0a54642f42fbbea175796e342fc7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot single_cycle_behav xil_defaultlib.single_cycle xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.mux
+Compiling module xil_defaultlib.pc
+Compiling module xil_defaultlib.add_4
+Compiling module xil_defaultlib.IMEM
+Compiling module xil_defaultlib.regs
+Compiling module xil_defaultlib.imm_gen
+Compiling module xil_defaultlib.branch_comp
+Compiling module xil_defaultlib.ALU
+Compiling module xil_defaultlib.dmem
+Compiling module xil_defaultlib.mux4
+Compiling module xil_defaultlib.control
+Compiling module xil_defaultlib.single_cycle
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot single_cycle_behav
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "single_cycle_behav -key {Behavioral:sim_1:Functional:single_cycle} -tclbatch {single_cycle.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+source single_cycle.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'single_cycle_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 876.527 ; gain = 0.000
+current_wave_config {Untitled 2}
+Untitled 2
+add_wave {{/single_cycle/REG_FILES/reg_file}} 
+current_wave_config {Untitled 2}
+Untitled 2
+add_wave {{/single_cycle/DMEM/MEM[40]}} {{/single_cycle/DMEM/MEM[39]}} {{/single_cycle/DMEM/MEM[38]}} {{/single_cycle/DMEM/MEM[37]}} {{/single_cycle/DMEM/MEM[36]}} {{/single_cycle/DMEM/MEM[35]}} {{/single_cycle/DMEM/MEM[34]}} {{/single_cycle/DMEM/MEM[33]}} {{/single_cycle/DMEM/MEM[32]}} {{/single_cycle/DMEM/MEM[31]}} {{/single_cycle/DMEM/MEM[30]}} {{/single_cycle/DMEM/MEM[29]}} {{/single_cycle/DMEM/MEM[28]}} {{/single_cycle/DMEM/MEM[27]}} {{/single_cycle/DMEM/MEM[26]}} {{/single_cycle/DMEM/MEM[25]}} {{/single_cycle/DMEM/MEM[24]}} {{/single_cycle/DMEM/MEM[23]}} {{/single_cycle/DMEM/MEM[22]}} {{/single_cycle/DMEM/MEM[21]}} {{/single_cycle/DMEM/MEM[20]}} {{/single_cycle/DMEM/MEM[19]}} {{/single_cycle/DMEM/MEM[18]}} {{/single_cycle/DMEM/MEM[17]}} {{/single_cycle/DMEM/MEM[16]}} {{/single_cycle/DMEM/MEM[15]}} {{/single_cycle/DMEM/MEM[14]}} {{/single_cycle/DMEM/MEM[13]}} {{/single_cycle/DMEM/MEM[12]}} {{/single_cycle/DMEM/MEM[11]}} {{/single_cycle/DMEM/MEM[10]}} {{/single_cycle/DMEM/MEM[9]}} {{/single_cycle/DMEM/MEM[8]}} {{/single_cycle/DMEM/MEM[7]}} {{/single_cycle/DMEM/MEM[6]}} {{/single_cycle/DMEM/MEM[5]}} {{/single_cycle/DMEM/MEM[4]}} {{/single_cycle/DMEM/MEM[3]}} {{/single_cycle/DMEM/MEM[2]}} {{/single_cycle/DMEM/MEM[1]}} {{/single_cycle/DMEM/MEM[0]}} 
+relaunch_sim
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'single_cycle' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj single_cycle_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/forev/Desktop/CH/uprocessor-design/SingleCycle/project/singlecycle.sim/sim_1/behav/xsim'
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: E:/Install/Vivado/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -wto 778b0a54642f42fbbea175796e342fc7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot single_cycle_behav xil_defaultlib.single_cycle xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+INFO: [USF-XSim-69] 'elaborate' step finished in '2' seconds
+Vivado Simulator 2018.2
+Time resolution is 1 ps
+relaunch_sim: Time (s): cpu = 00:00:02 ; elapsed = 00:00:05 . Memory (MB): peak = 877.285 ; gain = 0.000

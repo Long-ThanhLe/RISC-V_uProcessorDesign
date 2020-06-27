@@ -43,13 +43,13 @@ begin
 case (BrUn)
     1'b0:
         begin
-            BrEq <= (inA == inB) ? 1'b1 : 1'b0;
-            BrLT <= ($signed(inA) < $signed(inB)) ? 1'b1 : 1'b0;
+            BrEq = (inA == inB) ? 1'b1 : 1'b0;
+            BrLT = ($signed(inA) < $signed(inB)) ? 1'b1 : 1'b0;
         end
     1'b1:
         begin
-            BrEq <= (inA == inB) ? 1'b1 : 1'b0;
-            BrLT <= (inA <  inB) ? 1'b1 : 1'b0;
+            BrEq = (inA == inB) ? 1'b1 : 1'b0;
+            BrLT = (inA <  inB) ? 1'b1 : 1'b0;
         end
 endcase
 
