@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+`timescale 1ps / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
 // Engineer: 
@@ -72,10 +72,10 @@ control   Control(
 always
 begin
     clk = 0;
-    #10;
+    #400;
     clk = 1;
     count = count + 1;
-    #10;
+    #400;
 end
 initial begin
     count <= 0;
