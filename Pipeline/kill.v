@@ -37,7 +37,7 @@ module kill(
     in_killD,
     in_killX,
     in_killM,
-    in_killW,
+    in_killW
     );
 
 input [31:0] instF, instD, instX, instM, instW;
@@ -55,27 +55,27 @@ begin
             kill_en_next = 1'b0;
         end else begin
             case (instD[6:2])
-                JAL_TYPE: begin
-                    kill_en_next = 1'b1;
-                    killF_next = 1'b0;
-                    killD_next = 1'b1;
-                    killX_next = in_killD;
-                    killM_next = in_killX;
-                    killW_next = in_killM;
-                end
+                // JAL_TYPE: begin
+                //     kill_en_next = 1'b1;
+                //     killF_next = 1'b0;
+                //     killD_next = 1'b1;
+                //     killX_next = in_killD;
+                //     killM_next = in_killX;
+                //     killW_next = in_killM;
+                // end
                 default: kill_en_next = 1'b0;
             endcase
         end
     end else begin // X stage valid
         case (instX[6:2])
-            JALR_TYPE: begin // kill
-                kill_en_next = 1'b1;
-                killF_next = 1'b0;
-                killD_next = 1'b1;
-                killX_next = 1'b1;
-                killM_next = in_killX;
-                killW_next = in_killM;
-            end
+            // JALR_TYPE: begin // kill
+            //     kill_en_next = 1'b1;
+            //     killF_next = 1'b0;
+            //     killD_next = 1'b1;
+            //     killX_next = 1'b1;
+            //     killM_next = in_killX;
+            //     killW_next = in_killM;
+            // end
             B_TYPE: begin // can kill
                 if (predict_fail == 1'b1) begin // Predict fail, kill 2
                     kill_en_next = 1'b1;
@@ -93,14 +93,14 @@ begin
                     kill_en_next = 1'b0;
                 end else begin // X valid but not kill, D stage valid
                     case (instD[6:2])
-                        JAL_TYPE: begin
-                            kill_en_next = 1'b1;
-                            killF_next = 1'b0;
-                            killD_next = 1'b1;
-                            killX_next = in_killD;
-                            killM_next = in_killX;
-                            killW_next = in_killM;
-                        end
+                        // JAL_TYPE: begin
+                        //     kill_en_next = 1'b1;
+                        //     killF_next = 1'b0;
+                        //     killD_next = 1'b1;
+                        //     killX_next = in_killD;
+                        //     killM_next = in_killX;
+                        //     killW_next = in_killM;
+                        // end
                         default: kill_en_next = 1'b0;
                     endcase
                 end

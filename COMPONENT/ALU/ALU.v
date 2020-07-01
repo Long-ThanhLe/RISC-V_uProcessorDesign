@@ -31,16 +31,16 @@ input [3:0] sel;
 output [31:0] in1, in2, out;
 
 reg [31:0] out;
-parameter ADD = 0;
-parameter SUB = 1;
-parameter XOR = 2;
-parameter OR  = 3;
-parameter AND = 4;
-parameter SLL = 5;
-parameter SRL = 6;
-parameter SRA = 7;
-parameter USLT= 8;
-parameter SLT = 9;
+parameter ADD = 4'd0;
+parameter SUB = 4'd1;
+parameter XOR = 4'd2;
+parameter OR  = 4'd3;
+parameter AND = 4'd4;
+parameter SLL = 4'd5;
+parameter SRL = 4'd6;
+parameter SRA = 4'd7;
+parameter USLT= 4'd8;
+parameter SLT = 4'd9;
 
 initial begin
     out <= 32'd0;

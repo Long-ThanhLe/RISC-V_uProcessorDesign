@@ -69,7 +69,7 @@ begin
     R_TYPE: re2 = 1'b1; 
     I_CAL:  re2 = 1'b0;
     I_LOAD: re2 = 1'b0;
-    S_TYPE: re2 = 1'b0;
+    S_TYPE: re2 = 1'b1;
     B_TYPE: re2 = 1'b1;
     LUI_TYPE: re2 = 1'b0;
     AUIPC_TYPE: re2 = 1'b0;
