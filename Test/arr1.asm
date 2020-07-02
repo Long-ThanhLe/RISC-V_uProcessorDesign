@@ -1,12 +1,12 @@
 .globl main
 	#value
-	.eqv NUM1, 23
+	.eqv NUM1, 24
 	.eqv NUM2, 23
 	.eqv NUM3, -1
 	.eqv NUM4, 17
 	.eqv NUM5, 10
 	.eqv NUM6, -10
-	.eqv NUM7, 17
+	.eqv NUM7, 18
 	.eqv NUM8, 4
 	.eqv NUM9, 11
 	.eqv NUM10, 23

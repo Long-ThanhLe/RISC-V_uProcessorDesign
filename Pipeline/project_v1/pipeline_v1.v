@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 06/30/2020 10:33:36 AM
+// Create Date: 07/02/2020 05:09:29 PM
 // Design Name: 
-// Module Name: pipeline_reg
+// Module Name: pipeline_v1
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,23 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module pipeline_reg(
-    clk,
-    in,
-    out,
-    stall
-    );
-input clk, stall;
-input [31:0] in;
-output reg [31:0] out;
+module pipeline_v1();
 
-always @(posedge clk)
-begin
-    if (stall == 1'b0)
-    out <= in;
-end
 
-initial begin
-    out = 32'd0;
-end
+
 endmodule

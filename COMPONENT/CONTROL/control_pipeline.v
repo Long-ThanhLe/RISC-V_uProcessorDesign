@@ -39,15 +39,16 @@ module control_pipeline(
     MemRW,
     WBSel,
     RSel,
-    WSel
+    WSel,
+    stall_sig
     );
 
-input clk, BrEq, BrLT;
+input clk, BrEq, BrLT, stall_sig;
 input [31:0]  instF, instD,  instX, instM, instW;
 
 
 output [3:0] ALUSel;
-output [1:0] BSel;
+output [2:0] BSel;
 output [2:0] ASel, ImmSel, RSel, PCSel;
 output [1:0] WSel, WBSel;
 output BrUn, RegWen, MemRW;
@@ -99,7 +100,7 @@ kill      kill(.instF(instF), .instD(instD), .instX(instX), .instM(instM), .inst
 stall_bypass stall_bypass(.instF(instF), .instD(instD), .instE(instX), .instM(instM), .instW(instW), .alumux1(alumux1_sel), .alumux2(alumux2_sel),
                 .ASrc(ASel), .BSrc(BSel), .stall(stall));
 static_branch branch_predict(.instF(instF), .instD(instD), .instE(instX), .pcmux_sel_X(pc_true), .pcmux_sel_F(pc_sel_F), .predict_fail(predict_fail), .pcmux_sel_out(PCSel),
-                                .killD(killD), .killF(killF), .killE(killX));
+                                .killD(killD), .killF(killF), .killE(killX), .stall_in(stall), .stall_out(stall_sig));
 
 control   ControlF(.inst(instF), .PCSel(pc_sel_F), .ImmSel(ImmSel));
 control   ControlD(.inst(instD));
@@ -109,19 +110,23 @@ control   ControlM(.inst(instM), .MemRW(MemRW_ctl), .WBSel(WBSel_ctl), .RSel(RSe
 control   ControlW(.inst(instW), .RegWen(RegWen_ctl));
 
 // kill
-assign MemRW = MemRW_ctl & ~killM;
-assign RegWen = RegWen_ctl & ~killW;
-assign WBSel = WBSel_ctl & {2{~killM}};
-assign WSel = WSel_ctl & {2{~killM}};
-assign RSel = RSel_ctl & {3{~killM}};
+assign MemRW = MemRW_ctl & ~killM & ~stallM;
+assign RegWen = RegWen_ctl & ~killW & ~stallW;
+assign WBSel = WBSel_ctl & {2{~killM}} & {2{~stallM}};
+assign WSel = WSel_ctl & {2{~killM}} & {2{~stallM}};
+assign RSel = RSel_ctl & {3{~killM}} & {3{~stallM}};
 
 // pipeline reg
 always @(posedge clk)
 begin
 
-    stall_wait <= stall;
-    stallD <= stall_wait; 
-    stallX <= stallD;
+    // stall_wait <= stall; 
+    // stallD <= stall_wait; 
+    // stallX <= stallD;
+    // stallM <= stallX;
+    // stallW <= stallM;
+    stallD <= 1'b0; 
+    stallX <= stall;
     stallM <= stallX;
     stallW <= stallM;
 

@@ -34,7 +34,7 @@ module stall_bypass(
     );
 input alumux1, alumux2;
 input [31:0] instF, instD, instE, instM, instW;
-output reg [1:0] BSrc;
+output reg [2:0] BSrc;
 output reg [2:0] ASrc;
 output reg stall;
 
@@ -49,7 +49,7 @@ parameter IMM_JAL_TYPE = 5'b11011;
 parameter IMM_JALR_TYPE = 5'b11001;
 
 wire stall_load, stall_total;
-wire bypassA, bypassB, bypassA_M;
+wire bypassA, bypassB, bypassA_M, bypassB_M;
 
 wire re1D, re2D;
 wire we_bypassE, we_stallE;
@@ -82,6 +82,8 @@ assign bypassA = (rs1E == wsM) && (we_bypassM == 1'b1) && (re1E == 1'b1) && (wsM
 assign bypassB =  (rs2E == wsM) && (we_bypassM == 1'b1) && (re2E == 1'b1) && (wsM != 5'd0);
 
 assign bypassA_M = (rs1E == wsW) && (we_bypassW == 1'b1) && (re1E == 1'b1) && (wsW != 5'd0);
+assign bypassB_M = (rs2E == wsW) && (we_bypassW == 1'b1) && (re2E == 1'b1) && (wsW != 5'd0);
+
 // assign stall_add_addi = bypassA | bypassB;
 assign stall_total = stall_load ;
 
@@ -103,16 +105,21 @@ begin
     end
     if (bypassB) begin // Bypass alumux2
         BSrc[0] = alumux2;
-        BSrc[1] = 1'b1;
+        BSrc[2:1] = 2'd1;
     end else begin
-        BSrc[0] = alumux2;
-        BSrc[1] = 1'b0;
+        if (bypassB_M) begin
+            BSrc[0] = alumux2;
+            BSrc[2:1] = 2'd2;
+        end else begin
+            BSrc[0] = alumux2;
+            BSrc[2:1] = 2'd0;
+        end
     end
 end
 
 initial begin
     ASrc <= 3'd0;
-    BSrc <= 2'd0;
+    BSrc <= 3'd0;
     stall <= 1'b0;
 end
     
