@@ -13,9 +13,9 @@ verilog xil_defaultlib  \
 "../../../../../../Component/MUX/mux8.v" \
 "../../../../../../Component/BRANCH_PIPELINE/pipeline_branch.v" \
 "../../../../../../Component/REG/pipeline_reg.v" \
-"../../../../../r.v" \
+"../../../../../../Component/FORWARDING_PIPELINE/r.v" \
 "../../../../../../Component/REGS_FILE/regs.v" \
-"../../../../../w.v" \
+"../../../../../../Component/FORWARDING_PIPELINE/w.v" \
 "../../../../pipeline_v1.v" \
 
 # compile glbl module
