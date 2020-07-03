@@ -56,7 +56,7 @@ begin
     LUI_TYPE: we_bypass = 1'b1; // Not sure
     AUIPC_TYPE: we_bypass = 1'b1; // Not sure
     JAL_TYPE: we_bypass = 1'b1;
-    JALR_TYPE: we_bypass = 1'b1;
+    JALR_TYPE: we_bypass = 1'b1; // ???
     endcase
 end
 
@@ -70,8 +70,8 @@ begin
     B_TYPE: we_stall = 1'b0;
     LUI_TYPE: we_stall = 1'b0; // Not sure
     AUIPC_TYPE: we_stall = 1'b0; // Not sure
-    JAL_TYPE: we_stall = 1'b1; 
-    JALR_TYPE: we_stall = 1'b1;
+    JAL_TYPE: we_stall = 1'b0; 
+    JALR_TYPE: we_stall = 1'b1;// ???
     endcase
 end
 

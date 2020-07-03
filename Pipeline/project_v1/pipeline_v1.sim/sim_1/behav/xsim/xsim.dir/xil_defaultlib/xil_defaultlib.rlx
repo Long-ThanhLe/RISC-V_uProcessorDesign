@@ -1,0 +1,22 @@
+0.6
+2018.2
+Jun 14 2018
+20:41:02
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/ALU/ALU.v,1593539779,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMEM/IMEM.v,,ALU,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_COMP/branch_comp.v,1593242491,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/CONTROL/control.v,,branch_comp,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_PIPELINE/pipeline_branch.v,1593809628,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/REG/pipeline_reg.v,,pipeline_branch,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/CONTROL/control.v,1593277630,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/DMEM/dmem.v,,control,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/DMEM/dmem.v,1593277977,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/FORWARDING_PIPELINE/forwading_pipeline.v,,dmem,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/FORWARDING_PIPELINE/forwading_pipeline.v,1593798052,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMM_GEN/imm_gen.v,,forwading_pipeline,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMEM/IMEM.v,1593810145,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/PC_4/add_4.v,,IMEM,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMM_GEN/imm_gen.v,1593188150,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux.v,,imm_gen,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux.v,1593169088,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux4.v,,mux,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux4.v,1593169096,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux8.v,,mux4,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux8.v,1593539550,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_PIPELINE/pipeline_branch.v,,mux8,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/PC_4/add_4.v,1593169447,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_COMP/branch_comp.v,,add_4,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/REG/pipeline_reg.v,1593657264,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/r.v,,pipeline_reg,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Component/REGS_FILE/regs.v,1593168910,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/w.v,,regs,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/project_v1/pipeline_v1.sim/sim_1/behav/xsim/glbl.v,1529022455,verilog,,,,glbl,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/project_v1/pipeline_v1.v,1593810032,verilog,,,,pipeline_v1,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/r.v,1593505245,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Component/REGS_FILE/regs.v,,r,,,,,,,,
+C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/w.v,1593791539,verilog,,C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/project_v1/pipeline_v1.v,,w,,,,,,,,
