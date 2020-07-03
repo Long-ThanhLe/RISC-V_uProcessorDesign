@@ -21,6 +21,7 @@
 
 
 module pipeline_branch(
+    clk,
     instF,
     instD,
     instX,
@@ -34,7 +35,7 @@ module pipeline_branch(
     PCSel_F_out
     );
 input [31:0] instF, instD, instX;
-input validF, validD, validX, PCSel_F, PCSel_D;
+input validF, validD, validX, PCSel_F, PCSel_D, clk;
 output reg killD_req_next;
 output reg killX_req_next;
 output reg [2:0] PCSel_F_out;
@@ -52,11 +53,23 @@ parameter JALR_TYPE = 5'b11001;
 // Bug
 reg [15:0] kt;
 // Branch & JAL & JALR
+
+reg [1:0] state;
+/*
+    0: Hard Jump
+    1: Soft Jump
+    2: Hard Not Jump
+    3: Soft Not Jump
+*/
+reg predict_not_jump;
+reg return_jump;
+reg return_valid;
 always @(*)
 begin
 
 case ({{validD}, {validX}})
 2'b00: begin
+        return_valid = 1'b0;
         case (instF[6:2])
         JAL_TYPE: begin
             kt = 1;
@@ -72,7 +85,7 @@ case ({{validD}, {validX}})
         end
         B_TYPE: begin
             kt = 3;
-            PCSel_F_out = 3'd0; // Static predict not jump
+            PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
             killD_req_next = 1'b0;
             killX_req_next = 1'b0;
             
@@ -93,6 +106,7 @@ case ({{validD}, {validX}})
         endcase
     end
 2'b01: begin
+        return_valid = 1'b0;
         case (instX[6:2])
         JALR_TYPE: begin
             kt = 7;
@@ -116,7 +130,7 @@ case ({{validD}, {validX}})
             end
             B_TYPE: begin
                 kt = 10;
-                PCSel_F_out = 3'd0; // Static predict not jump
+                PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
                 killD_req_next = 1'b0;
                 killX_req_next = 1'b0;
             end
@@ -140,48 +154,94 @@ case ({{validD}, {validX}})
 2'b10: begin
         case (instD[6:2])
         B_TYPE: begin
-            if (PCSel_D == 1'b1) begin // Predict fail
+            return_valid = 1'b1;
+            if (PCSel_D == 1'b1) begin // Return Jump
+                return_jump = 1'b1;
                 kt = 13;
-                killD_req_next = 1'b1;
-                killX_req_next = 1'b0;
-                PCSel_F_out = 3'd3; // PCD + ImmD
-            end else begin
-                case (instF[6:2])
-                JAL_TYPE: begin
-                    kt = 14;
-                    killD_req_next = 1'b0;
+                if (predict_not_jump == 1'b1) begin 
+                    killD_req_next = 1'b1;
                     killX_req_next = 1'b0;
-                    PCSel_F_out = 3'd1; // PC + ImF
-                end
-                JALR_TYPE: begin
-                    kt = 15;
-                    killD_req_next = 1'b0;
-                    killX_req_next = 1'b0;
-                    PCSel_F_out = 3'd0; // PC + 4 // Guest
-                end
-                B_TYPE: begin
-                    kt = 16;
-                    PCSel_F_out = 3'd0; // Static predict not jump
-                    killD_req_next = 1'b0;
-                    killX_req_next = 1'b0;
-                end
-                default: begin
-                    killD_req_next = 1'b0;
-                    killX_req_next = 1'b0;
-                    
-                    // PCF next
-                    if (PCSel_F == 1'b0) begin
-                        kt = 17;
-                        PCSel_F_out = 3'd0; 
-                    end else begin
-                        kt = 18;
-                        PCSel_F_out = 3'd1; 
+                    PCSel_F_out = 3'd3; // PCD + ImmD
+                end else begin
+                    case (instF[6:2])
+                    JAL_TYPE: begin
+                        kt = 14;
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        PCSel_F_out = 3'd1; // PC + ImF
                     end
+                    JALR_TYPE: begin
+                        kt = 15;
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        PCSel_F_out = 3'd0; // PC + 4 // Guest
+                    end
+                    B_TYPE: begin
+                        kt = 16;
+                        PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                    end
+                    default: begin
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        
+                        // PCF next
+                        if (PCSel_F == 1'b0) begin
+                            kt = 17;
+                            PCSel_F_out = 3'd0; 
+                        end else begin
+                            kt = 18;
+                            PCSel_F_out = 3'd1; 
+                        end
+                    end
+                    endcase 
                 end
-                endcase
+            end else begin // Return Not Jump
+                return_jump = 1'b0;
+                if (predict_not_jump == 1'b1) begin
+                    case (instF[6:2])
+                    JAL_TYPE: begin
+                        kt = 14;
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        PCSel_F_out = 3'd1; // PC + ImF
+                    end
+                    JALR_TYPE: begin
+                        kt = 15;
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        PCSel_F_out = 3'd0; // PC + 4 // Guest
+                    end
+                    B_TYPE: begin
+                        kt = 16;
+                        PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                    end
+                    default: begin
+                        killD_req_next = 1'b0;
+                        killX_req_next = 1'b0;
+                        
+                        // PCF next
+                        if (PCSel_F == 1'b0) begin
+                            kt = 17;
+                            PCSel_F_out = 3'd0; 
+                        end else begin
+                            kt = 18;
+                            PCSel_F_out = 3'd1; 
+                        end
+                    end
+                    endcase
+                end else begin // Predict Jump
+                    killD_req_next = 1'b1;
+                    killX_req_next = 1'b0;
+                    PCSel_F_out = 3'd4; // PCD + 4
+                end
             end
         end
         default: begin
+            return_valid = 1'b0;
             case (instF[6:2])
             JAL_TYPE: begin
                 kt = 19;
@@ -197,7 +257,7 @@ case ({{validD}, {validX}})
             end
             B_TYPE: begin
                 kt = 21;
-                PCSel_F_out = 3'd0; // Static predict not jump
+                PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
                 killD_req_next = 1'b0;
                 killX_req_next = 1'b0;
             end
@@ -221,6 +281,7 @@ case ({{validD}, {validX}})
 2'b11: begin
     case (instX[6:2])
         JALR_TYPE: begin
+            return_valid = 1'b0;
             kt = 24;
             killD_req_next = 1'b1;
             killX_req_next = 1'b1;
@@ -229,48 +290,94 @@ case ({{validD}, {validX}})
         default: begin
             case (instD[6:2])
             B_TYPE: begin
-                if (PCSel_D == 1'b1) begin // Predict fail
+                return_valid = 1'b1;
+                if (PCSel_D == 1'b1) begin // return jump
+                    return_jump = 1'b1;
                     kt = 25;
-                    killD_req_next = 1'b1;
-                    killX_req_next = 1'b0;
-                    PCSel_F_out = 3'd3; // PCD + ImmD
-                end else begin
-                    case (instF[6:2])
-                    JAL_TYPE: begin
-                        kt = 26;
-                        killD_req_next = 1'b0;
+                    if (predict_not_jump == 1'b1) begin
+                        killD_req_next = 1'b1;
                         killX_req_next = 1'b0;
-                        PCSel_F_out = 3'd1; // PC + ImF
-                    end
-                    JALR_TYPE: begin
-                        kt = 27;
-                        killD_req_next = 1'b0;
-                        killX_req_next = 1'b0;
-                        PCSel_F_out = 3'd0; // PC + 4 // Guest
-                    end
-                    B_TYPE: begin
-                        kt = 28;
-                        PCSel_F_out = 3'd0; // Static predict not jump
-                        killD_req_next = 1'b0;
-                        killX_req_next = 1'b0;
-                    end
-                    default: begin
-                        killD_req_next = 1'b0;
-                        killX_req_next = 1'b0;
-                        
-                        // PCF next
-                        if (PCSel_F == 1'b0) begin
-                            kt = 29;
-                            PCSel_F_out = 3'd0; 
-                        end else begin
-                            kt = 30;
-                            PCSel_F_out = 3'd1; 
+                        PCSel_F_out = 3'd3; // PCD + ImmD
+                    end else begin
+                        case (instF[6:2])
+                        JAL_TYPE: begin
+                            kt = 26;
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            PCSel_F_out = 3'd1; // PC + ImF
                         end
+                        JALR_TYPE: begin
+                            kt = 27;
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            PCSel_F_out = 3'd0; // PC + 4 // Guest
+                        end
+                        B_TYPE: begin
+                            kt = 28;
+                            PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                        end
+                        default: begin
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            
+                            // PCF next
+                            if (PCSel_F == 1'b0) begin
+                                kt = 29;
+                                PCSel_F_out = 3'd0; 
+                            end else begin
+                                kt = 30;
+                                PCSel_F_out = 3'd1; 
+                            end
+                        end
+                        endcase
                     end
-                    endcase
+                end else begin // return not jump
+                    return_jump = 1'b0;
+                    if (predict_not_jump == 1'b1) begin
+                        case (instF[6:2])
+                        JAL_TYPE: begin
+                            kt = 26;
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            PCSel_F_out = 3'd1; // PC + ImF
+                        end
+                        JALR_TYPE: begin
+                            kt = 27;
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            PCSel_F_out = 3'd0; // PC + 4 // Guest
+                        end
+                        B_TYPE: begin
+                            kt = 28;
+                            PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                        end
+                        default: begin
+                            killD_req_next = 1'b0;
+                            killX_req_next = 1'b0;
+                            
+                            // PCF next
+                            if (PCSel_F == 1'b0) begin
+                                kt = 29;
+                                PCSel_F_out = 3'd0; 
+                            end else begin
+                                kt = 30;
+                                PCSel_F_out = 3'd1; 
+                            end
+                        end
+                        endcase
+                    end else begin
+                        killD_req_next = 1'b1;
+                        killX_req_next = 1'b0;
+                        PCSel_F_out = 3'd4; // PCD + 4
+                    end
                 end
             end
             default: begin
+                return_valid = 1'b0;
                 case (instF[6:2])
                 JAL_TYPE: begin
                     kt = 31;
@@ -286,7 +393,7 @@ case ({{validD}, {validX}})
                 end
                 B_TYPE: begin
                     kt = 33;
-                    PCSel_F_out = 3'd0; // Static predict not jump
+                    PCSel_F_out = {{2'd0}, ~predict_not_jump};//3'd0; // Static predict not jump
                     killD_req_next = 1'b0;
                     killX_req_next = 1'b0;
                 end
@@ -311,11 +418,64 @@ case ({{validD}, {validX}})
     end
 endcase
 end
+always @(posedge clk)
+begin
+    if (return_valid == 1'b1) begin
+        case (state)
+        2'd0: begin
+            if (return_jump == 1'b1) begin
+                state = 2'd0;
+                predict_not_jump = 0;
+            end else begin
+                state = 2'd1;
+                predict_not_jump = 0;
+            end
+        end
+        2'd1: begin
+            if (return_jump == 1'b1) begin
+                state = 2'd0;
+                predict_not_jump = 0;
+            end else begin
+                state = 2'd2;
+                predict_not_jump = 1;
+            end    
+        end
+        2'd2: begin
+            if (return_jump == 1'b1) begin
+                state = 2'd3;
+                predict_not_jump = 1;
+            end else begin
+                state = 2'd2;
+                predict_not_jump = 1;
+            end    
+        end
+        2'd3: begin
+            if (return_jump == 1'b1) begin
+                state = 2'd0;
+                predict_not_jump = 0;
+            end else begin
+                state = 2'd2;
+                predict_not_jump = 1;
+            end    
+        end
+        endcase
+    end
+end
 
+/*
+    0: Hard Jump
+    1: Soft Jump
+    2: Hard Not Jump
+    3: Soft Not Jump
+*/
 
 initial begin
     killD_req_next = 0;
     killX_req_next = 0;
     PCSel_F_out = 3'd0;
+    state = 0;
+    return_jump = 1;
+    predict_not_jump = 1;
+    return_valid = 0;
 end
 endmodule

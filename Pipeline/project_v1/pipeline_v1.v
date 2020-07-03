@@ -39,7 +39,7 @@ wire [2:0] PCSel_F_out, imm_sel;
 wire [31:0] PC_Imm_F;
 // D
 wire [4:0] rsAD, rsBD;
-wire [31:0] rsAD_out, rsBD_out, Abypass_out, Bbypass_out, alumuxA_out, alumuxB_out, PC_Imm_D;
+wire [31:0] rsAD_out, rsBD_out, Abypass_out, Bbypass_out, alumuxA_out, alumuxB_out, PC_Imm_D, pcD_4;
 wire [1:0] Abypass_sel, Bbypass_sel;
 wire alumuxA_sel, alumuxB_sel, br_eq_D, br_lt_D, br_un_D;
 // X
@@ -71,7 +71,7 @@ mux8       PCmux(
     .in1(PC_Imm_F),      // 1: PCF + ImmF
     .in2(ALUout_X),      // 2: JALR -> ALUout_X
     .in3(PC_Imm_D),      // 3: Branch PCD + ImmD
-    .in4(),
+    .in4(pcD_4),         // 4: Branch PCD + 4
     .in5(),
     .in6(),
     .in7(),
@@ -93,6 +93,9 @@ pipeline_reg        PCD_reg   (.clk(clk), .in(pcF),   .out(pcD),   .stall(stallD
 pipeline_reg        instD_reg (.clk(clk), .in(instF), .out(instD), .stall(stallD));  // Stage register
 pipeline_reg        immD_reg  (.clk(clk), .in(immF),  .out(immD),  .stall(stallD));  // Stage register
 pipeline_reg        branch_reg(.clk(clk), .in(PC_Imm_F),  .out(PC_Imm_D),  .stall(stallD));
+
+add_4     PCD_4 (.in(pcD), .out(pcD_4));
+
 
 assign rsAD = instD[19:15];
 assign rsBD = instD[24:20];
@@ -215,6 +218,7 @@ control   ControlW(
 
 
 pipeline_branch pipeline_branch(
+    .clk(clk),
     .instF(instF),
     .instD(instD),
     .instX(instX),
