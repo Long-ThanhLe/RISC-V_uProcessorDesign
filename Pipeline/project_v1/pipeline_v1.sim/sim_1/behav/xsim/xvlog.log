@@ -1,0 +1,34 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/ALU/ALU.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ALU
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMEM/IMEM.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module IMEM
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/PC_4/add_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module add_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_COMP/branch_comp.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module branch_comp
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/CONTROL/control.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module control
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/DMEM/dmem.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dmem
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/FORWARDING_PIPELINE/forwading_pipeline.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module forwading_pipeline
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/IMM_GEN/imm_gen.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module imm_gen
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux4
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/MUX/mux8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux8
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/BRANCH_PIPELINE/pipeline_branch.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipeline_branch
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/REG/pipeline_reg.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipeline_reg
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/r.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module r
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Component/REGS_FILE/regs.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regs
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/w.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module w
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/forev/Desktop/CH/uprocessor-design/Pipeline/project_v1/pipeline_v1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module pipeline_v1
