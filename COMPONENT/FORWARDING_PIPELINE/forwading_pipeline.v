@@ -78,8 +78,8 @@ assign Bbypass_WD = (rs2D == wsW) && (we_bypassW == 1'b1) && (re2D == 1'b1) && (
 
 // Load use - stall
 wire stall_load_A, stall_load_B, stall_load;
-assign stall_load_B = (rs2F == wsD) && (we_bypassD == 1'b1) && (re2F == 1'b1) && (wsD != 5'd0) && (validF == 1'b1) && (validD == 1'b1) && (instD[6:2] == 5'd0) && (instD[14:12] == 3'b010);
-assign stall_load_A = (rs1F == wsD) && (we_bypassD == 1'b1) && (re1F == 1'b1) && (wsD != 5'd0) && (validF == 1'b1) && (validD == 1'b1) && (instD[6:2] == 5'd0) && (instD[14:12] == 3'b010);
+assign stall_load_B = (rs2F == wsD) && (we_stallD == 1'b1) && (re2F == 1'b1) && (wsD != 5'd0) && (validF == 1'b1) && (validD == 1'b1) ;
+assign stall_load_A = (rs1F == wsD) && (we_stallD == 1'b1) && (re1F == 1'b1) && (wsD != 5'd0) && (validF == 1'b1) && (validD == 1'b1) ;
 assign stall_load = stall_load_A | stall_load_B;
 
 always @(*)

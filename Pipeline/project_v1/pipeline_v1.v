@@ -229,10 +229,12 @@ pipeline_branch pipeline_branch(
     );
 
 forwading_pipeline forwading_pipeline(
+    .instF(instF),
     .instD(instD),
     .instX(instX),
     .instM(instM),
     .instW(instW),
+    .validF(validF),
     .validD(validD),
     .validX(validX),
     .validM(validM),
