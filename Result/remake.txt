@@ -1,0 +1,9 @@
+# Single cycle
+	Clock: 800ps
+	Total time: 1.8812 us
+# Pipeline 5 stages
+	Clock: 200ps
+	Total time: 0.5793 us
+# Pipeline 6 stages
+	Clock: 200ps
+	Total time: 0.6789 us
